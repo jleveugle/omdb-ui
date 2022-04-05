@@ -13,7 +13,7 @@ function SearchBar({s, type, y }) {
                 </label>
                 <label className="block border-r px-2 flex border-b md:border-b-0">
                     <span className="sr-only">Type</span>
-                    <select className="block py-4 md:py-2 px-4 align-middle capitalize w-full md:w-auto" name="type" defaultValue={type}>
+                    <select className="block bg-white py-4 md:py-2 px-4 align-middle capitalize w-full md:w-auto" name="type" defaultValue={type}>
                         <option></option>
                         { TypeOptions.map((type) => <option key={type} className="capitalize">{type}</option> )}
                     </select>
