@@ -8,7 +8,7 @@ function Results() {
 
   const router = useRouter();
 
-  const { items, hasMore, loadItems, observe } = InfiniteScrolling({
+  const { items, hasMore, loadItems, observe, total } = InfiniteScrolling({
     getItems: ({ page }) => {
         const { s, type, y } = router.query;
 
@@ -22,10 +22,10 @@ function Results() {
 
         for (let key in params) {
           if (params[key]) {
-            usp.append(key, params[key]);
+            usp.append(key, typeof params[key] === 'string' ? params[key].trim() : params[key]);
           }
         }
-
+        router.push(`?${usp.toString()}`, undefined, { shallow: true })
         return fetch(`/api/omdb?${usp.toString()}&page=${page}`)
     }
   });
@@ -42,9 +42,9 @@ function Results() {
   return (
     <div className="mx-auto">
       <div className="container mx-auto p-5 md:px-0">
-        {/* <span>
-          {totalResults} résultats pour la recherche &quot;{s}&quot;
-        </span> */}
+        <span>
+          {total.current} results for your search
+        </span>
 
         <div className="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-5 py-5">
           {items.map((result) => (

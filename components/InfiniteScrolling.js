@@ -8,6 +8,7 @@ const useInfiniteLoading = (props) => {
     const router = useRouter();
     const { page } = router.query;
     const pageToLoad = useRef(page || 1);
+    const total = useRef(0);
     const initialPageLoaded = useRef(false);
     const isLoading = useRef(false);
     const [hasMore, setHasMore] = useState(true);
@@ -26,6 +27,7 @@ const useInfiniteLoading = (props) => {
       setHasMore((Math.floor(totalResults / 10)) > pageToLoad.current);
       setItems(prevItems => [...prevItems, ...Search]);
       pageToLoad.current++;
+      total.current = totalResults;
       isLoading.current = false;
     };
   
@@ -51,7 +53,8 @@ const useInfiniteLoading = (props) => {
       items,
       hasMore,
       loadItems,
-      observe
+      observe,
+      total
     };
   }
 

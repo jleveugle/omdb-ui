@@ -1,8 +1,17 @@
 import { ArrowNarrowRightIcon, SearchIcon } from '@heroicons/react/solid'
+import { useRouter } from "next/router";
+import { useState, useEffect } from 'react';
 
 const TypeOptions = ['movie', 'series', 'episode', 'game']
 
 function SearchBar({s, type, y }) {
+    const router = useRouter();
+    const [typeValue, setTypeValue] = useState(type);
+
+    useEffect(() => {
+        setTypeValue(type)
+    }, [router.isReady, setTypeValue, type])
+
     return <div className="block flex bg-white">
         <form method="GET" action="/results" className="md:border-b w-full">
             <div className="container flex mx-auto flex-col md:flex-row">
@@ -13,14 +22,14 @@ function SearchBar({s, type, y }) {
                 </label>
                 <label className="block border-r px-2 flex border-b md:border-b-0">
                     <span className="sr-only">Type</span>
-                    <select className="block bg-white py-4 md:py-2 px-4 align-middle capitalize w-full md:w-auto" name="type" defaultValue={type}>
+                    <select className="block bg-white py-4 md:py-2 px-4 align-middle capitalize w-full md:w-auto" name="type" value={typeValue} onChange={(e) => setTypeValue(e.target.value)}>
                         <option></option>
-                        { TypeOptions.map((type) => <option key={type} className="capitalize">{type}</option> )}
+                        { TypeOptions.map((type, index) => <option key={index} value={type}>{type}</option> )}
                     </select>
                 </label>
                 <label className="my-auto flex border-b md:border-b-0">
-                    <span className="sr-only">Year</span>
-                    <input className="py-4 md:py-2 px-4 w-full block" type="text" name="y" defaultValue={y} placeholder="Year" />
+                    <span className="sr-only">Year (YYYY)</span>
+                    <input className="py-4 md:py-2 px-4 w-full block" type="text" name="y" defaultValue={y} placeholder="Year (YYYY)" />
                 </label>
                 <div className="md:ml-auto md:border-l px-5 md:px-0">
                     <button type="submit" className="flex mx-auto text-white bg-blue-500 md:bg-white justify-center w-full md:w-auto px-5 rounded py-4 mt-5 md:mt-0 md:pl-8 md:py-3 font-medium md:text-gray-400">
