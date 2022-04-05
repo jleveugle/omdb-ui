@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import { ArrowDownIcon } from "@heroicons/react/outline";
+import { ArrowDownIcon, EmojiSadIcon} from "@heroicons/react/outline";
 
 import CardResult from "../../components/CardResult";
-
 import InfiniteScrolling from '../../components/InfiniteScrolling'
 
 function Results() {
@@ -29,19 +28,16 @@ function Results() {
 
         return fetch(`/api/omdb?${usp.toString()}&page=${page}`)
     }
-});
+  });
 
-//   if (error) return <div>Failed to load</div>;
-  if (!items) return <div>Loading...</div>;
-
-//   if (data.Response === "False")
-//     return (
-//       <div className="p-20 m-20 text-center text-3xl text-gray-600">
-//         <EmojiSadIcon className="h-20 w-20 mb-4 mx-auto" />
-//         Malgré tous nos efforts, <br />
-//         nous n&apos;avons pas trouvé de résultat correspondant à votre recherche
-//       </div>
-//     );
+  if (items.length <= 0)
+    return (
+      <div className="p-20 m-20 text-center text-3xl text-gray-600">
+        <EmojiSadIcon className="h-20 w-20 mb-4 mx-auto" />
+        Despite our best efforts, <br />
+        we did not find any result corresponding to your search
+      </div>
+    );
 
   return (
     <div className="mx-auto">

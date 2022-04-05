@@ -21,11 +21,11 @@ const useInfiniteLoading = (props) => {
         page: pageToLoad.current
       });
 
-      const {totalResults, Search } = await response.json();
+      const {totalResults, Search = [] } = await response.json();
 
       setHasMore((Math.floor(totalResults / 10)) > pageToLoad.current);
-        setItems(prevItems => [...prevItems, ...Search]);
-        pageToLoad.current++;
+      setItems(prevItems => [...prevItems, ...Search]);
+      pageToLoad.current++;
       isLoading.current = false;
     };
   

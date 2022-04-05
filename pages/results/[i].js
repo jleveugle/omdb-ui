@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import useSWR from "swr";
 import Image from 'next/image'
 
+import Error from '../../components/Error'
+import Loading from '../../components/Loading'
 import PeopleItem from '../../components/PeopleItem'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -12,8 +14,8 @@ const Result = () => {
 
   const { data, error } = useSWR(`/api/omdb?i=${i}`, fetcher);
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (error) return <Error />;
+  if (!data) return <Loading />;
 
   return <div className="container mx-auto py-20 flex flex-col md:flex-row px-5 md:px-0">
     <div className="md:mr-10 mx-auto">

@@ -36,7 +36,9 @@ function Header() {
             </div>
             <div className="text-center md:text-right my-auto w-full md:w-1/2">
               <a
-                href=""
+                target="_blank"
+                rel="noreferrer"
+                href="https://github.com/jleveugle/omdb-ui"
                 className="inline-block bg-white rounded px-8 py-4 text-blue-600 font-medium mr-4 w-full my-5 md:w-auto md:my-0"
               >
                 <CodeIcon className="h-5 l-5 inline-block mr-2" />
@@ -44,7 +46,8 @@ function Header() {
               </a>
               <a
                 target="_blank"
-                href=""
+                rel="noreferrer"
+                href="https://www.omdbapi.com/"
                 className="inline-block px-8 py-4 rounded font-medium text-white bg-white bg-opacity-20 w-full md:w-auto"
               >
                 <CubeIcon className="h-5 l-5 inline-block mr-2" />
